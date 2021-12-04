@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: api-ingress
+spec:
+  rules:
+    - host: "henchen.cis188.org"
+      http:
+        paths:
+          - path: "/"
+            backend:
+              serviceName: web
+              servicePort: 8000
+  tls:
+    - hosts:
+        - "henchen.cis188.org"
+      secretName: henchen-cis188-org-tls
