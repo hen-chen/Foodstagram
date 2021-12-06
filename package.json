@@ -4,16 +4,19 @@
   "description": "Final app",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "build": "parcel watch frontend/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently --kill-others \"npm run build\" \"npm run start\""
+    "build": "parcel watch frontend/index.html",
+    "server": "node backend/server.js",
+    "dev": "concurrently --kill-others \"npm run build\" \"npm run server\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@popperjs/core": "^2.11.0",
+    "axios": "^0.24.0",
     "babel-eslint": "^10.1.0",
+    "bootstrap": "^5.1.3",
     "concurrently": "^6.4.0",
     "cookie-session": "^1.4.0",
     "eslint": "^6.8.0",
@@ -22,6 +25,7 @@
     "mongoose": "^6.0.12",
     "parcel-bundler": "^1.12.5",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-router": "^6.0.2",
     "react-router-dom": "^6.0.2"
