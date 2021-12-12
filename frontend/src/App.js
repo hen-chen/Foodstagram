@@ -50,7 +50,7 @@ const App = () => {
           <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
             {loggedIn ? (
                 <div>
-                  <h5>Hi, {user}! <Link onClick={logout} to="logout">Log out</Link></h5>
+                  <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
                 </div>
               ) : (
                 <Button onClick={e => navigate('/login')}> Log in to for insider food image </Button>
