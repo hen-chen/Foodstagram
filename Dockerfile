@@ -1,4 +1,4 @@
-FROM node:15-alpine
+FROM node:15
 
 # install deps
 ADD package.json /tmp/package.json
