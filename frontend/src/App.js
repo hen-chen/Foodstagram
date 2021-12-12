@@ -46,7 +46,7 @@ const App = () => {
     <div>
       <Container style={{ margin: '1rem' }}>
         <Row>
-          <Col><h1>Foodstagram!</h1></Col>
+          <Col><h1>Foodstagram!!</h1></Col>
           <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
             {loggedIn ? (
                 <div>
