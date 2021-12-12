@@ -63,6 +63,7 @@ const Signup = () => {
           </Form>
           <p>
             Already have an account?
+            {' '}
             <Link to="/login">Log in!</Link>
           </p>
         </div>

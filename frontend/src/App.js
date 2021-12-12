@@ -10,11 +10,16 @@ const App = () => {
   const navigate = useNavigate()
 
   useEffect(async () => {
-    const { data } = await axios.get('/account/check')
-    if (data !== 'user not logged in') {
-      setUser(data)
-      setLoggedIn(true)
+    try {
+      const { data } = await axios.get('/account/check')
+      if (data !== 'user not logged in') {
+        setUser(data)
+        setLoggedIn(true)
+      }
+    } catch (err) {
+      alert('error with getting current user')
     }
+
   }, [])
 
   useEffect(() => {
@@ -24,23 +29,28 @@ const App = () => {
   }, [user])
 
   const logout = async () => {
-    const { data } = await axios.post('/account/logout', {})
-    if (data === 'user is logged out') {
-      setUser(null)
-      setLoggedIn(false)
-      navigate('/')
+    try {
+      const { data } = await axios.post('/account/logout', {})
+      if (data === 'user is logged out') {
+        setUser(null)
+        setLoggedIn(false)
+        navigate('/')
+      }
+    } catch (err) {
+      alert('error with logout')
     }
+
   }
 
   return (
     <div>
       <Container style={{ margin: '1rem' }}>
         <Row>
-          <Col><h1> Food! </h1></Col>
+          <Col><h1>Foodstagram!</h1></Col>
           <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
-            { loggedIn ? (
+            {loggedIn ? (
                 <div>
-                  <h5>Hi, {user} <Link onClick={logout} to="logout">Log out</Link></h5>
+                  <h5>Hi, {user}! <Link onClick={logout} to="logout">Log out</Link></h5>
                 </div>
               ) : (
                 <Button onClick={e => navigate('/login')}> Log in to for insider food image </Button>
@@ -48,7 +58,7 @@ const App = () => {
           </Col>
         </Row>
         <Row>
-          { loggedIn ? (
+          {loggedIn && (
             <div>
               <Col>
                 <Button className="btn" onClick={() => {
@@ -63,8 +73,7 @@ const App = () => {
               </Col>
               <Col style={{ marginTop: '1rem', width: '50rem' }}><Image src={image} fluid/></Col>
             </div>
-          ) : null
-          }
+          )}
         </Row>
       </Container>
     </div>
