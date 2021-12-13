@@ -33,7 +33,7 @@ const App = () => {
       window.alert('Error: addF')
     }
   }
- 
+
   // fetches Users every 2 seconds
   useEffect(async () => {
     listU()
@@ -80,52 +80,72 @@ const App = () => {
 
   return (
     <div>
-      <Container style={{ margin: '1rem' }}>
-        <Row>
-          <Col><h1>Foodstagram!!</h1></Col>
-          <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
-            {loggedIn ? (
-                <div>
-                  <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
-                </div>
-              ) : (
-                <Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button>
+      <div style={{ backgroundColor: '#efefef' }}>
+        <Container style={{ padding: '1rem' }}>
+          <Row>
+            <Col><h1>Foodstagram!!</h1></Col>
+            <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
+              {loggedIn ? (
+                  <div>
+                    <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
+                  </div>
+                ) : (
+                  <Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button>
+              )}
+            </Col>
+          </Row>
+          <div>
+            {loggedIn && (
+              <div>
+                { image != null ? (
+                  <div>
+                    <Row style={{ marginTop: '1rem' }}>
+                      <Col style={{display: 'flex', justifyContent: 'center'}}>
+                        <Image style={{ maxWidth: '300px', maxHeight:'300px' }} src={image} fluid/>
+                      </Col>
+                    </Row>
+                    <Row style={{ marginTop: '1rem' }}>
+                      <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
+                        <Button variant="info" className="btn" onClick={() => addF()}> Fav! 🤩</Button>
+                      </Col>
+                      <Col>
+                        <Button variant="info" className="btn" onClick={() => {
+                          fetch('https://foodish-api.herokuapp.com/api/')
+                            .then(res => res.json())
+                            .then(({ image }) => {
+                              setImage(image)
+                            })
+                        }}>
+                          nah, next!
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
+                ) : (
+                  <Row>
+                    <Col>
+                      <Button className="btn" onClick={() => {
+                        fetch('https://foodish-api.herokuapp.com/api/')
+                          .then(res => res.json())
+                          .then(({ image }) => {
+                            setImage(image)
+                          })
+                      }}>
+                        Load food image!
+                      </Button>
+                    </Col>
+                  </Row>
+                )}
+              </div>
             )}
-          </Col>
-        </Row>
-        <Row>
-          {loggedIn && (
-            <div>
-              <Col>
-                <Button className="btn" onClick={() => {
-                  fetch('https://foodish-api.herokuapp.com/api/')
-                    .then(res => res.json())
-                    .then(({ image }) => {
-                      setImage(image)
-                    })
-                }}>
-                  Load food image!
-                </Button>
-              </Col>
-              <Col style={{ marginTop: '1rem', width: '50rem' }}> 
-              <Image style={{ maxWidth: '300px', maxHeight:'300px' }} src={image} fluid/>
-              <br />
-              <button
-                style={{ width: "100px", height:"60px" }}
-                className="btn btn-success hover"
-                onClick={() => addF()}
-              >
-                👍 Fav!
-              </button>
-              </Col>
-            </div>
-          )}
-          <br />
-          <hr />
-          <div className="container"> 
+          </div>
+        </Container>
+      </div>
+      <div>
+        <Container style={{ padding: '1rem' }}>
             <h3>Users and their favorite food!</h3>
             {users.map(u => (
-              <div key={u._id} className="card">
+              <div key={u._id} className="card" style={{ marginBottom: '1rem' }}>
                 <h4>
                   {u.username}
                   &apos;s
@@ -146,9 +166,8 @@ const App = () => {
                 {u.foods.length === 0 && <p> No favorite foods :( </p>}
               </div>
             ))}
-          </div>
-        </Row>
-      </Container>
+          </Container>
+      </div>
     </div>
   )
 }
