@@ -11,6 +11,7 @@ const App = () => {
   const [actualUserObj, setActualUserObj] = useState({})
   const [users, setUsers] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
+  const [show, setShow] = useState('home')
   const navigate = useNavigate()
 
   // lists all users
@@ -20,20 +21,6 @@ const App = () => {
       setUsers(data)
     } catch (err) {
       console.log(err)
-    }
-  }
-
-  // deletes a user
-  const deleteUser = async() => {
-    try {
-      const { _id } = actualUserObj
-      const { data } = await axios.delete('/api/deleteUser', { data: { _id} })
-      if (data === 'User deleted') {
-        window.alert('User successfully deleted!')
-        navigate('/login')
-      }
-    } catch (err) {
-      window.alert('Error: deleteUser')
     }
   }
 
@@ -63,20 +50,16 @@ const App = () => {
     if (user === '' || user === null) {
       setLoggedIn(false)
     }
-  }, [user])
-
-  const logout = async () => {
-    try {
-      const { data } = await axios.post('/account/logout', {})
-      if (data === 'user is logged out') {
-        setUser(null)
-        setLoggedIn(false)
-        navigate('/')
-      }
-    } catch (err) {
-      alert('error with logout')
+    if (show === 'home') {
+      document.getElementById('home').style.fontWeight = 'bold'
+      document.getElementById('profile').style.fontWeight = 'normal'
     }
-  }
+
+    if (show === 'profile') {
+      document.getElementById('home').style.fontWeight = 'normal'
+      document.getElementById('profile').style.fontWeight = 'bold'
+    }
+  }, [user, show])
 
   const getFoodRegex = url => String(url).split('/')[4]
 
@@ -84,24 +67,35 @@ const App = () => {
     <div>
       <div style={{ backgroundColor: '#efefef' }}>
         <Container style={{ padding: '1rem' }}>
-          <Row>
-            <Col sm={8}><h1>Foodstagram!!</h1></Col>
-            <Col><h5>Home</h5></Col>
-            <Col><h5>Profile</h5></Col>
-            <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
-              {loggedIn ? (
-                <div>
-                  <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
-                </div>
-                ) : (
-                  <Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button>
-              )}
-            </Col>
-          </Row>
-          <Profile loggedIn={loggedIn} actualUserObj={actualUserObj} />
+            {
+              loggedIn ? (
+                <Row>
+                  <Col sm={8}><h1>Foodstagram!!</h1></Col>
+                  <Col><h5 id="home" onClick={() => setShow('home')}>Home</h5></Col>
+                  <Col><h5 id="profile" onClick={() => setShow('profile')}>Profile</h5></Col>
+                  <Col>
+                    <h5>Hi, {user}!</h5>
+                  </Col>
+                </Row>
+              ) : (
+                <Row>
+                  <Col sm={6}><h1>Foodstagram!!</h1></Col>
+                  <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}><Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button></Col>
+                  <h5 id="home"></h5><h5 id="profile"></h5>
+                </Row>
+              )
+            }
         </Container>
       </div>
-      <Home users={users} />
+      {
+        loggedIn ? (
+          show == 'home' ? (
+            <Home users={users} />
+          ) : (
+            <Profile loggedIn={loggedIn} actualUserObj={actualUserObj} setActualUserObj={setActualUserObj} setUser={setUser} setLoggedIn={setLoggedIn}/>
+          )
+        ) : null
+      }
     </div>
   )
 }

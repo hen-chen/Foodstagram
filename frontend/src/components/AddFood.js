@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
 import Foods from './Foods'
 
-const AddFood = ({ loggedIn, actualUserObj }) => {
+const AddFood = ({ loggedIn, actualUserObj, setActualUserObj }) => {
   const [image, setImage] = useState(null)
   // Add food to user list
   const addF = async() => {
@@ -20,6 +20,11 @@ const AddFood = ({ loggedIn, actualUserObj }) => {
         .then(({ image }) => {
           setImage(image)
         })
+      const { data: userData } = await axios.get('/account/check')
+      if (userData !== 'user not logged in') {
+        setActualUserObj(userData)
+        console.log(data)
+      }
     } catch (err) {
       console.log(err)
       window.alert('Error: addF')
