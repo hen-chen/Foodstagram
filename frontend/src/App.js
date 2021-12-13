@@ -70,11 +70,11 @@ const App = () => {
             {
               loggedIn ? (
                 <Row>
-                  <Col sm={8}><h1>Foodstagram!!</h1></Col>
-                  <Col><h5 id="home" onClick={() => setShow('home')}>Home</h5></Col>
-                  <Col><h5 id="profile" onClick={() => setShow('profile')}>Profile</h5></Col>
+                  <Col sm={8} style={{ fontFamily: "Snell Roundhand, cursive" }}><h1>Foodstagram!!</h1></Col>
+                  <Col style={{ fontWeight: 'bold' }}><h5 id="home" onClick={() => setShow('home')} style={{ fontFamily: "Americana" }}>Home</h5></Col>
+                  <Col><h5 id="profile" onClick={() => setShow('profile')} style={{ fontFamily: "Americana" }}>Profile</h5></Col>
                   <Col>
-                    <h5>Hi, {user}!</h5>
+                    <h5 style={{ fontFamily: "Americana" }}>Hi, {user}!</h5>
                   </Col>
                 </Row>
               ) : (

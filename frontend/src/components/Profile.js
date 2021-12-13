@@ -71,7 +71,7 @@ const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLogged
       <Container style={{ padding: '1rem' }}>
         <Card key={actualUserObj._id} style={{ marginBottom: '1rem' }}>
           <Card.Body>
-            <Card.Title>
+            <Card.Title style={{ fontFamily: "Americana" }}>
               {actualUserObj.username}
               &apos;s
               {' '}
@@ -80,8 +80,8 @@ const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLogged
             <Container>
                 <Foods u_id={actualUserObj._id} foods={actualUserObj.foods} />
             </Container>
-            {actualUserObj.foods.length === 0 && <p> No favorite foods :( </p>}
-            <h4>
+            {actualUserObj.foods.length === 0 && <p style={{ fontFamily: "Americana" }}> No favorite foods :( </p>}
+            <h4 style={{ fontFamily: "Americana" }}>
               {actualUserObj.username}
               &apos;s
               {' '}
@@ -89,14 +89,14 @@ const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLogged
             </h4>
             {actualUserObj.friends.map(f => (
               <div key={uuidv4()}>
-                <p className="card-text">
+                <p className="card-text" style={{ fontFamily: "Americana" }}>
                   •
                   {' '}
                   {f}
                 </p>
               </div>
             ))}
-            {actualUserObj.friends.length === 0 && <p> No friends :( </p>}
+            {actualUserObj.friends.length === 0 && <p style={{ fontFamily: "Americana" }}> No friends :( </p>}
           </Card.Body>
         </Card>
       </Container>

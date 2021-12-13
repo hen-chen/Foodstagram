@@ -10,11 +10,11 @@ const Home = ({ users }) => {
   return (
     <div>
       <Container style={{ padding: '1rem' }}>
-          <h3>Users and their favorite food!</h3>
+          <h3 style={{ fontFamily: "Americana" }}>Users and their favorite food!</h3>
           {users.map(u => (
             <Card key={u._id} style={{ marginBottom: '1rem' }}>
               <Card.Body>
-                <Card.Title>
+                <Card.Title style={{ fontFamily: "Americana" }}>
                   {u.username}
                   &apos;s
                   {' '}
@@ -23,8 +23,8 @@ const Home = ({ users }) => {
                 <Container>
                     <Foods u_id={u._id} foods={u.foods} />
                 </Container>
-                {u.foods.length === 0 && <p> No favorite foods :( </p>}
-                <h4>
+                {u.foods.length === 0 && <p style={{ fontFamily: "Americana" }}> No favorite foods :( </p>}
+                <h4 style={{ fontFamily: "Americana" }}>
                   {u.username}
                   &apos;s
                   {' '}
@@ -32,14 +32,14 @@ const Home = ({ users }) => {
                 </h4>
                 {u.friends.map(f => (
                   <div key={uuidv4()}>
-                    <p className="card-text">
+                    <p style={{ fontFamily: "Americana" }} className="card-text">
                       •
                       {' '}
                       {f}
                     </p>
                   </div>
                 ))}
-                {u.friends.length === 0 && <p> No friends :( </p>}
+                {u.friends.length === 0 && <p style={{ fontFamily: "Americana" }}> No friends :( </p>}
               </Card.Body>
             </Card>
           ))}
