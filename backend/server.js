@@ -7,6 +7,7 @@ const APIRouter = require('./routes/api')
 
 const app = express()
 
+// Remote DB
 const MONGO_URI = 'mongodb+srv://dbUser:dbUserPassword@cluster0.28lky.mongodb.net/188final?retryWrites=true&w=majority'
 
 mongoose.connect(MONGO_URI, {
