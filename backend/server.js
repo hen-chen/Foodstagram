@@ -8,11 +8,7 @@ const { errorHandler } = require('./middlewares/errorHandler')
 
 const app = express()
 
-<<<<<<< HEAD
-const MONGO_URI = process.env.MONGODB_URI || 'mongodb+srv://dbUser:dbUserPassword@cluster0.28lky.mongodb.net/188final?retryWrites=true&w=majority' /*'mongodb://localhost:27017/webDev' */
-=======
-const MONGO_URI = process.env.MONGODB_URI || /*'mongodb://localhost:27017/webDev'*/ 'mongodb+srv://dbUser:dbUserPassword@cluster0.28lky.mongodb.net/188final?retryWrites=true&w=majority'
->>>>>>> a0a9183308486e674cc81e4e0cc34cb61eea9b09
+const MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/webDev' /*'mongodb+srv://dbUser:dbUserPassword@cluster0.28lky.mongodb.net/188final?retryWrites=true&w=majority' */
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,

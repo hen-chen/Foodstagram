@@ -70,15 +70,9 @@ const App = () => {
             {
               loggedIn ? (
                 <Row>
-<<<<<<< HEAD
                   <Col sm={8} style={{ fontFamily: "Snell Roundhand, cursive" }}><h1>Foodstagram!!</h1></Col>
-                  <Col style={{ fontWeight: 'bold' }}><h5 id="home" onClick={() => setShow('home')} style={{ fontFamily: "Americana" }}>Home</h5></Col>
+                  <Col><h5 id="home" onClick={() => setShow('home')} style={{ fontFamily: "Americana", fontWeight: "bold" }}>Home</h5></Col>
                   <Col><h5 id="profile" onClick={() => setShow('profile')} style={{ fontFamily: "Americana" }}>Profile</h5></Col>
-=======
-                  <Col sm={8}><h1 style={{ fontFamily: "Snell Roundhand, cursive" }}>Foodstagram</h1></Col>
-                  <Col><h5 id="home" onClick={() => setShow('home')}>Home</h5></Col>
-                  <Col><h5 id="profile" onClick={() => setShow('profile')}>Profile</h5></Col>
->>>>>>> a0a9183308486e674cc81e4e0cc34cb61eea9b09
                   <Col>
                     <h5 style={{ fontFamily: "Americana" }}>Hi, {user}!</h5>
                   </Col>
