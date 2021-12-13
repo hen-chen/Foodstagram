@@ -11,19 +11,7 @@ const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLogged
   const [newFriend, setNewFriend] = useState(false)
   const [fText, setFText] = useState('')
   const navigate = useNavigate()
-
-  // const getU = async () => {
-  //   try {
-  //     const { data } = await axios.get('/account/check')
-  //     if (data !== 'user not logged in') {
-  //       setActualUserObj(data)
-  //       console.log(data)
-  //     }
-  //   } catch (err) {
-  //     alert('error with getting current user')
-  //   }
-  // }
-
+  
   // deletes a user
   const deleteUser = async() => {
     try {
