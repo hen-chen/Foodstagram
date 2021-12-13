@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
+import Food from './components/Food'
 
 const App = () => {
   const [image, setImage] = useState(null)
@@ -11,7 +12,6 @@ const App = () => {
   const [users, setUsers] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
   const navigate = useNavigate()
-  console.log(users)
 
   const listU = async () => {
     try {
@@ -180,12 +180,9 @@ const App = () => {
                   </Card.Title>
                   <Container>
                     <Row>
-                      {u.foods.map(f => (
+                      {u.foods.map((f, id) => (
                           <Col sm={3}>
-                            <Container style={{ position: 'relative', textAlign: 'center'}}>
-                              <Image style={{ maxWidth: '200px', maxHeight:'150px', marginTop:'0.5rem' }} src={f} onMouseEnter={e => e.target.style.opacity = '0.3'} onMouseLeave={e => e.target.style.opacity = '1'}></Image>
-                              <p className="middle" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>{getFoodRegex(f)}</p>
-                            </Container>
+                            <Food id={id} foodImg={f} foodName={getFoodRegex(f)} />
                           </Col>
                       ))}
                     </Row>
