@@ -11,7 +11,6 @@ const Login = () => {
   const findUser = async () => {
     try {
       const { data } = await axios.post('/account/login', { username, password })
-      console.log(data)
       if (data === 'user logged in successfully') {
         navigate('/')
       } else if (username === '' || password === '') {
