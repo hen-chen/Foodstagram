@@ -11,18 +11,21 @@ const App = () => {
   const [actualUserObj, setActualUserObj] = useState({})
   const [users, setUsers] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
+  const [newFriend, setNewFriend] = useState(false)
+  const [fText, setFText] = useState('')
   const navigate = useNavigate()
 
+  // lists all users
   const listU = async () => {
     try {
       const { data } = await axios.get('/api/users')
       setUsers(data)
     } catch (err) {
-      window.alert('Error: listU')
+      console.log(err)
     }
   }
 
-  // Add food to user list // TODO
+  // Add food to user list
   const addF = async() => {
     try {
       const { _id } = actualUserObj
@@ -39,7 +42,25 @@ const App = () => {
       window.alert('Error: addF')
     }
   }
+  
+  // adds Friend to user list
+  const addFriend = async() => {
+    try {
+      const { _id } = actualUserObj
+      const { data } = await axios.put('/api/friend', { _id, friend: fText })
+      setNewFriend(false)
+      setFText('')
+      if (data === 'Friend added') {
+        window.alert('Friend added!')
+      } else {
+        window.alert('Error: no user with that username!')
+      }
+    } catch (err) {
+      window.alert('Error: addFriend')
+    }
+  }
 
+  // deletes a user
   const deleteUser = async() => {
     try {
       const { _id } = actualUserObj
@@ -106,13 +127,48 @@ const App = () => {
               {loggedIn ? (
                 <div>
                   <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
-                  <Button
+                  <button
                     type="button"
                     className="btn btn-danger hover"
                     onClick={() => deleteUser()}
                   >
                     Delete account!
-                  </Button>
+                  </button>
+
+                  <br />
+                  {/* add a new friend */}
+                  <button
+                    type="button"
+                    className="btn mx-1 btn-primary hover"
+                    onClick={() => setNewFriend(true)}
+                  >
+                    Add Friend!
+                  </button>
+
+                  {newFriend && (
+                    <div className="card">
+                      <h4> New Friend: </h4>
+                      <input
+                        onChange={e => setFText(e.target.value)}
+                        placeholder="Write new friend username here"
+                      />
+                      <br />
+                      <button
+                        type="button"
+                        className="btn mx-1 btn-warning hover"
+                        onClick={() => addFriend()}
+                      >
+                        Submit Friend Request!
+                      </button>
+                      <button
+                        type="button"
+                        className="btn mx-1 btn-dark hover"
+                        onClick={() => setNewFriend(false)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
                 </div>
                 ) : (
                   <Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button>
@@ -196,4 +252,5 @@ const App = () => {
     </div>
   )
 }
+
 export default App

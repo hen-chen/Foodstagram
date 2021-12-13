@@ -31,6 +31,26 @@ router.put('/api/add', isAuthenticated, async (req, res, next) => {
   }
 })
 
+router.put('/api/friend', isAuthenticated, async (req, res, next) => {
+  const { _id, friend } = req.body
+  try {
+    const user = await User.findOne({ username: friend })
+    if (!user) res.send('Friend not added')
+    else {
+      User.findByIdAndUpdate(
+        _id,
+        { $push: { friends: friend } },
+        (err, model) => {
+          if (err !== null) res.send('Error adding friend')
+        },
+      )
+      res.send('Friend added')
+    }
+  } catch (err) {
+    next(new Error('could not add Friend'))
+  }
+})
+
 router.delete('/api/deleteUser', isAuthenticated, async (req, res, next) => {
   const { _id } = req.body
   try {
