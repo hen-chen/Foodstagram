@@ -7,11 +7,7 @@ const APIRouter = require('./routes/api')
 
 const app = express()
 
-<<<<<<< HEAD
-const MONGO_URI = process.env.MONGODB_URI || 'mongodb+srv://dbUser:dbUserPassword@cluster0.28lky.mongodb.net/188final?retryWrites=true&w=majority' /*'mongodb://localhost:27017/webDev'*/
-=======
 const MONGO_URI = 'mongodb+srv://dbUser:dbUserPassword@cluster0.28lky.mongodb.net/188final?retryWrites=true&w=majority'
->>>>>>> e06155e (HELP)
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,
