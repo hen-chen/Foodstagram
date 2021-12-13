@@ -244,6 +244,22 @@ const App = () => {
                     </Row>
                   </Container>
                   {u.foods.length === 0 && <p> No favorite foods :( </p>}
+                  <h4>
+                    {u.username}
+                    &apos;s
+                    {' '}
+                    Friends:
+                  </h4>
+                  {u.friends.map(f => (
+                    <div key={uuidv4()}>
+                      <p className="card-text">
+                        •
+                        {' '}
+                        {f}
+                      </p>
+                    </div>
+                  ))}
+                  {u.friends.length === 0 && <p> No friends :( </p>}
                 </Card.Body>
               </Card>
             ))}
