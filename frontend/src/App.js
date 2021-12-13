@@ -3,17 +3,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
-import Foods from './components/Foods'
-import AddFriends from './components/AddFriends'
+import Home from './components/Home'
+import Profile from './components/Profile'
 
 const App = () => {
-  const [image, setImage] = useState(null)
   const [user, setUser] = useState('')
   const [actualUserObj, setActualUserObj] = useState({})
   const [users, setUsers] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
-  const [newFriend, setNewFriend] = useState(false)
-  const [fText, setFText] = useState('')
   const navigate = useNavigate()
 
   // lists all users
@@ -23,24 +20,6 @@ const App = () => {
       setUsers(data)
     } catch (err) {
       console.log(err)
-    }
-  }
-
-  // Add food to user list
-  const addF = async() => {
-    try {
-      const { _id } = actualUserObj
-      const { data } = await axios.put('/api/add', { _id, food: image })
-      if (data === 'Food added') {
-        window.alert('Food added!')
-      }
-      fetch('https://foodish-api.herokuapp.com/api/')
-        .then(res => res.json())
-        .then(({ image }) => {
-          setImage(image)
-        })
-    } catch (err) {
-      window.alert('Error: addF')
     }
   }
 
@@ -106,113 +85,23 @@ const App = () => {
       <div style={{ backgroundColor: '#efefef' }}>
         <Container style={{ padding: '1rem' }}>
           <Row>
-            <Col><h1>Foodstagram!!</h1></Col>
+            <Col sm={8}><h1>Foodstagram!!</h1></Col>
+            <Col><h5>Home</h5></Col>
+            <Col><h5>Profile</h5></Col>
             <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
               {loggedIn ? (
                 <div>
                   <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
-
-                  {/* add a new friend */}
-                  {
-                    newFriend ? (
-                      <AddFriends setNewFriend={() => setNewFriend(false)} fText={fText} setFText={setFText} actualUserObj={actualUserObj}/>
-                    ) : (
-                      <div>
-                        <Button className="btn mx-1 btn-primary hover" onClick={() => setNewFriend(true)}>Add Friend!</Button>
-                        <Button className="btn btn-danger hover" onClick={() => deleteUser()}>Delete account!</Button>
-                      </div>
-                    )
-                  }
                 </div>
                 ) : (
                   <Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button>
               )}
             </Col>
           </Row>
-          <div>
-            {loggedIn && (
-              <div>
-                { image != null ? (
-                  <div>
-                    <Row style={{ marginTop: '1rem' }}>
-                      <Col style={{display: 'flex', justifyContent: 'center'}}>
-                        <Image style={{ maxWidth: '300px', maxHeight:'300px' }} src={image} fluid/>
-                      </Col>
-                    </Row>
-                    <Row style={{ marginTop: '1rem' }}>
-                      <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
-                        <Button variant="info" className="btn" onClick={() => addF()}> Fav! 🤩</Button>
-                      </Col>
-                      <Col>
-                        <Button variant="info" className="btn" onClick={() => {
-                          fetch('https://foodish-api.herokuapp.com/api/')
-                            .then(res => res.json())
-                            .then(({ image }) => {
-                              setImage(image)
-                            })
-                        }}>
-                          nah, next!
-                        </Button>
-                      </Col>
-                    </Row>
-                  </div>
-                ) : (
-                  <Row>
-                    <Col>
-                      <Button className="btn" onClick={() => {
-                        fetch('https://foodish-api.herokuapp.com/api/')
-                          .then(res => res.json())
-                          .then(({ image }) => {
-                            setImage(image)
-                          })
-                      }}>
-                        Load food image!
-                      </Button>
-                    </Col>
-                  </Row>
-                )}
-              </div>
-            )}
-          </div>
+          <Profile loggedIn={loggedIn} actualUserObj={actualUserObj} />
         </Container>
       </div>
-      <div>
-        <Container style={{ padding: '1rem' }}>
-            <h3>Users and their favorite food!</h3>
-            {users.map(u => (
-              <Card key={u._id} style={{ marginBottom: '1rem' }}>
-                <Card.Body>
-                  <Card.Title>
-                    {u.username}
-                    &apos;s
-                    {' '}
-                    picks:
-                  </Card.Title>
-                  <Container>
-                      <Foods u_id={u._id} foods={u.foods} />
-                  </Container>
-                  {u.foods.length === 0 && <p> No favorite foods :( </p>}
-                  <h4>
-                    {u.username}
-                    &apos;s
-                    {' '}
-                    Friends:
-                  </h4>
-                  {u.friends.map(f => (
-                    <div key={uuidv4()}>
-                      <p className="card-text">
-                        •
-                        {' '}
-                        {f}
-                      </p>
-                    </div>
-                  ))}
-                  {u.friends.length === 0 && <p> No friends :( </p>}
-                </Card.Body>
-              </Card>
-            ))}
-          </Container>
-      </div>
+      <Home users={users} />
     </div>
   )
 }
