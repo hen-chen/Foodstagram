@@ -10,19 +10,22 @@ const App = () => {
   const [actualUserObj, setActualUserObj] = useState({})
   const [users, setUsers] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
+  const [newFriend, setNewFriend] = useState(false)
+  const [fText, setFText] = useState('')
   const navigate = useNavigate()
   console.log(users)
 
+  // lists all users
   const listU = async () => {
     try {
       const { data } = await axios.get('/api/users')
       setUsers(data)
     } catch (err) {
-      window.alert('Error: listU')
+      console.log(err)
     }
   }
 
-  // Add food to user list // TODO
+  // Add food to user list
   const addF = async() => {
     try {
       const { _id } = actualUserObj
@@ -39,7 +42,25 @@ const App = () => {
       window.alert('Error: addF')
     }
   }
+  
+  // adds Friend to user list
+  const addFriend = async() => {
+    try {
+      const { _id } = actualUserObj
+      const { data } = await axios.put('/api/friend', { _id, friend: fText })
+      setNewFriend(false)
+      setFText('')
+      if (data === 'Friend added') {
+        window.alert('Friend added!')
+      } else {
+        window.alert('Error: no user with that username!')
+      }
+    } catch (err) {
+      window.alert('Error: addFriend')
+    }
+  }
 
+  // deletes a user
   const deleteUser = async() => {
     try {
       const { _id } = actualUserObj
@@ -106,13 +127,48 @@ const App = () => {
               {loggedIn ? (
                 <div>
                   <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
-                  <Button
+                  <button
                     type="button"
                     className="btn btn-danger hover"
                     onClick={() => deleteUser()}
                   >
                     Delete account!
-                  </Button>
+                  </button>
+
+                  <br />
+                  {/* add a new friend */}
+                  <button
+                    type="button"
+                    className="btn mx-1 btn-primary hover"
+                    onClick={() => setNewFriend(true)}
+                  >
+                    Add Friend!
+                  </button>
+
+                  {newFriend && (
+                    <div className="card">
+                      <h4> New Friend: </h4>
+                      <input
+                        onChange={e => setFText(e.target.value)}
+                        placeholder="Write new friend username here"
+                      />
+                      <br />
+                      <button
+                        type="button"
+                        className="btn mx-1 btn-warning hover"
+                        onClick={() => addFriend()}
+                      >
+                        Submit Friend Request!
+                      </button>
+                      <button
+                        type="button"
+                        className="btn mx-1 btn-dark hover"
+                        onClick={() => setNewFriend(false)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
                 </div>
                 ) : (
                   <Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button>
@@ -170,6 +226,7 @@ const App = () => {
         <Container style={{ padding: '1rem' }}>
             <h3>Users and their favorite food!</h3>
             {users.map(u => (
+<<<<<<< Updated upstream
               <Card key={u._id} style={{ marginBottom: '1rem' }}>
                 <Card.Body>
                   <Card.Title>
@@ -193,10 +250,49 @@ const App = () => {
                   {u.foods.length === 0 && <p> No favorite foods :( </p>}
                 </Card.Body>
               </Card>
+=======
+              <div key={u._id} className="card" style={{ marginBottom: '1rem' }}>
+                <h4>
+                  {u.username}
+                  &apos;s
+                  {' '}
+                  picks:
+                </h4>
+                {u.foods.map(f => (
+                  <div key={uuidv4()}>
+                    <p className="card-text">
+                      •
+                      {' '}
+                      <a href={f} target="_">
+                        {getFoodRegex(f)}
+                      </a>
+                    </p>
+                  </div>
+                ))}
+                {u.foods.length === 0 && <p> No favorite foods :( </p>}
+                <h4>
+                  {u.username}
+                  &apos;s
+                  {' '}
+                  Friends:
+                </h4>
+                {u.friends.map(f => (
+                  <div key={uuidv4()}>
+                    <p className="card-text">
+                      •
+                      {' '}
+                      {f}
+                    </p>
+                  </div>
+                ))}
+                {u.friends.length === 0 && <p> No friends :( </p>}
+              </div>
+>>>>>>> Stashed changes
             ))}
           </Container>
       </div>
     </div>
   )
 }
+
 export default App

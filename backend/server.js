@@ -4,6 +4,7 @@ const session = require('cookie-session')
 
 const AccountRouter = require('./routes/account')
 const APIRouter = require('./routes/api')
+const { errorHandler } = require('./middlewares/errorHandler')
 
 const app = express()
 
@@ -34,6 +35,7 @@ app.post('/', (req, res) => {
 
 app.use('/account', AccountRouter)
 app.use('', APIRouter)
+app.use(errorHandler)
 
 // set favicon
 app.get('/favicon.ico', (req, res) => {
