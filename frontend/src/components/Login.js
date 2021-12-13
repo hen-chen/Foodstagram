@@ -42,17 +42,17 @@ const Login = () => {
         <div className="shadow border login-box">
           <div className="row">
             <div className="col">
-              <h1>Login</h1>
+              <h1 style={{ fontFamily: "Americana", fontWeight: "bold" }}>Login</h1>
             </div>
           </div>
           <Form style={{ width: '15rem' }}>
             <Form.Group controlId="formBasicUsername">
-              <Form.Label> Username: </Form.Label>
+              <Form.Label style={{ fontFamily: "Americana" }}> Username: </Form.Label>
               <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
               <br />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
-              <Form.Label> Password: </Form.Label>
+              <Form.Label style={{ fontFamily: "Americana" }}> Password: </Form.Label>
               <Form.Control type="text" onChange={e => setPassword(e.target.value)} />
               <br />
             </Form.Group>
@@ -60,7 +60,7 @@ const Login = () => {
               <Button variant="info" onClick={findUser} size="lg"> Log In </Button>
             </div>
           </Form>
-          <p>
+          <p style={{ fontFamily: "Americana" }}>
             Don&apos;t have an account?
             {' '}
             <Link to="/signup">Sign up!</Link>

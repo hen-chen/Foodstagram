@@ -23,23 +23,23 @@ const Home = ({ users }) => {
                 <Container>
                     <Foods u_id={u._id} foods={u.foods} />
                 </Container>
-                {u.foods.length === 0 && <p style={{ fontFamily: "Americana" }}> No favorite foods :( </p>}
-                <h4 style={{ fontFamily: "Americana" }}>
+                {u.foods.length === 0 && <Card.Text style={{ fontFamily: "Americana" }}> No favorite foods :( </Card.Text>}
+                <Card.Title style={{ fontFamily: "Americana" }}>
                   {u.username}
                   &apos;s
                   {' '}
                   Friends:
-                </h4>
+                </Card.Title>
                 {u.friends.map(f => (
                   <div key={uuidv4()}>
-                    <p style={{ fontFamily: "Americana" }} className="card-text">
+                    <Card.Text style={{ fontFamily: "Americana" }}>
                       •
                       {' '}
                       {f}
-                    </p>
+                    </Card.Text>
                   </div>
                 ))}
-                {u.friends.length === 0 && <p style={{ fontFamily: "Americana" }}> No friends :( </p>}
+                {u.friends.length === 0 && <Card.Text style={{ fontFamily: "Americana" }}> No friends :( </Card.Text>}
               </Card.Body>
             </Card>
           ))}

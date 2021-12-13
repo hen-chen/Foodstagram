@@ -79,7 +79,7 @@ const App = () => {
                 </Row>
               ) : (
                 <Row>
-                  <Col sm={6}><h1>Foodstagram!!</h1></Col>
+                  <Col sm={6} style={{ fontFamily: "Snell Roundhand, cursive" }}><h1>Foodstagram!!</h1></Col>
                   <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}><Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button></Col>
                   <h5 id="home"></h5><h5 id="profile"></h5>
                 </Row>

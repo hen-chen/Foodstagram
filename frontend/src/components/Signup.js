@@ -43,17 +43,17 @@ const Signup = () => {
         <div className="shadow border login-box">
           <div className="row">
             <div className="col">
-              <h1>Signup</h1>
+              <h1 style={{ fontFamily: "Americana", fontWeight: "bold" }}>Signup</h1>
             </div>
           </div>
           <Form style={{ width: '15rem' }}>
             <Form.Group controlId="formBasicUsername">
-              <Form.Label> Username: </Form.Label>
+              <Form.Label style={{ fontFamily: "Americana" }}> Username: </Form.Label>
               <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
               <br />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
-              <Form.Label> Password: </Form.Label>
+              <Form.Label style={{ fontFamily: "Americana" }}> Password: </Form.Label>
               <Form.Control type="text" onChange={e => setPassword(e.target.value)} />
               <br />
             </Form.Group>
@@ -61,7 +61,7 @@ const Signup = () => {
               <Button variant="info" onClick={createUser} size="lg"> Sign Up </Button>
             </div>
           </Form>
-          <p>
+          <p style={{ fontFamily: "Americana" }}>
             Already have an account?
             {' '}
             <Link to="/login">Log in!</Link>
