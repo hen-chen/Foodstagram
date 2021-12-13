@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
-import { Container, Row, Col, Button, Image } from 'react-bootstrap'
+import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
 
 const App = () => {
   const [image, setImage] = useState(null)
@@ -11,6 +11,7 @@ const App = () => {
   const [users, setUsers] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
   const navigate = useNavigate()
+  console.log(users)
 
   const listU = async () => {
     try {
@@ -29,6 +30,11 @@ const App = () => {
       if (data === 'Food added') {
         window.alert('Food added!')
       }
+      fetch('https://foodish-api.herokuapp.com/api/')
+        .then(res => res.json())
+        .then(({ image }) => {
+          setImage(image)
+        })
     } catch (err) {
       window.alert('Error: addF')
     }
@@ -164,26 +170,29 @@ const App = () => {
         <Container style={{ padding: '1rem' }}>
             <h3>Users and their favorite food!</h3>
             {users.map(u => (
-              <div key={u._id} className="card" style={{ marginBottom: '1rem' }}>
-                <h4>
-                  {u.username}
-                  &apos;s
-                  {' '}
-                  picks:
-                </h4>
-                {u.foods.map(f => (
-                  <div key={uuidv4()}>
-                    <p className="card-text">
-                      •
-                      {' '}
-                      <a href={f} target="_">
-                        {getFoodRegex(f)}
-                      </a>
-                    </p>
-                  </div>
-                ))}
-                {u.foods.length === 0 && <p> No favorite foods :( </p>}
-              </div>
+              <Card key={u._id} style={{ marginBottom: '1rem' }}>
+                <Card.Body>
+                  <Card.Title>
+                    {u.username}
+                    &apos;s
+                    {' '}
+                    picks:
+                  </Card.Title>
+                  <Container>
+                    <Row>
+                      {u.foods.map(f => (
+                          <Col sm={3}>
+                            <Container style={{ position: 'relative', textAlign: 'center'}}>
+                              <Image style={{ maxWidth: '200px', maxHeight:'150px', marginTop:'0.5rem' }} src={f} onMouseEnter={e => e.target.style.opacity = '0.3'} onMouseLeave={e => e.target.style.opacity = '1'}></Image>
+                              <p className="middle" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>{getFoodRegex(f)}</p>
+                            </Container>
+                          </Col>
+                      ))}
+                    </Row>
+                  </Container>
+                  {u.foods.length === 0 && <p> No favorite foods :( </p>}
+                </Card.Body>
+              </Card>
             ))}
           </Container>
       </div>
