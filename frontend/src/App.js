@@ -25,10 +25,8 @@ const App = () => {
   const addF = async() => {
     try {
       const { _id } = actualUserObj
-      const { data } = await axios.post('/api/add', { _id, food: image })
+      const { data } = await axios.put('/api/add', { _id, food: image })
       if (data === 'Food added') {
-        console.log(image)
-        console.log(_id)
         window.alert('Food added!')
       }
     } catch (err) {

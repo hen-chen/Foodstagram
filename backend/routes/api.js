@@ -15,7 +15,7 @@ router.get('/api/users', async (req, res, next) => {
   }
 })
 
-router.post('/api/add', isAuthenticated, async (req, res, next) => {
+router.put('/api/add', isAuthenticated, async (req, res, next) => {
   const { _id, food } = req.body
   try {
     User.findByIdAndUpdate(

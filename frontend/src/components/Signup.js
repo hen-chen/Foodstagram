@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
@@ -12,7 +12,7 @@ const Signup = () => {
     try {
       const { data } = await axios.post('/account/signup', { username, password })
       if (data === 'user created') {
-        navigate('/')
+        navigate('/login')
       }
     } catch (err) {
       if (username === '' || password === '') {

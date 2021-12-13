@@ -26,11 +26,12 @@ router.post('/signup', async (req, res, next) => {
   const { username, password } = req.body
 
   try {
-    await User.create({
+    const user = await User.create({
       username, password,
     })
     req.session.username = username
     req.session.password = password
+    req.session.user = user
     res.send('user created')
   } catch (err) {
     next(new Error('user creation has problems'))
