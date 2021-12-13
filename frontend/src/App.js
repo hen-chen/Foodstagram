@@ -92,7 +92,7 @@ const App = () => {
           show == 'home' ? (
             <Home users={users} />
           ) : (
-            <Profile loggedIn={loggedIn} actualUserObj={actualUserObj} setActualUserObj={setActualUserObj} setUser={setUser} setLoggedIn={setLoggedIn}/>
+            <Profile loggedIn={loggedIn} actualUserObj={actualUserObj} setActualUserObj={setActualUserObj} setUser={setUser} setLoggedIn={setLoggedIn} users={users}/>
           )
         ) : null
       }

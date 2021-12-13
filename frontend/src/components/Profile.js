@@ -7,22 +7,10 @@ import AddFriends from './AddFriends'
 import AddFood from './AddFood'
 import Foods from './Foods'
 
-const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLoggedIn }) => {
+const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLoggedIn, users }) => {
   const [newFriend, setNewFriend] = useState(false)
   const [fText, setFText] = useState('')
   const navigate = useNavigate()
-
-  // const getU = async () => {
-  //   try {
-  //     const { data } = await axios.get('/account/check')
-  //     if (data !== 'user not logged in') {
-  //       setActualUserObj(data)
-  //       console.log(data)
-  //     }
-  //   } catch (err) {
-  //     alert('error with getting current user')
-  //   }
-  // }
 
   // deletes a user
   const deleteUser = async() => {
@@ -68,45 +56,41 @@ const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLogged
         </Row>
       </Container>
 
-      <Container style={{ padding: '1rem' }}>
-        <Card key={actualUserObj._id} style={{ marginBottom: '1rem' }}>
-          <Card.Body>
-            <Card.Title style={{ fontFamily: "Americana" }}>
-              {actualUserObj.username}
-              &apos;s
-              {' '}
-              picks:
-            </Card.Title>
-            <Container>
-                <Foods u_id={actualUserObj._id} foods={actualUserObj.foods} />
-            </Container>
-            {actualUserObj.foods.length === 0 && <p style={{ fontFamily: "Americana" }}> No favorite foods :( </p>}
-            <h4 style={{ fontFamily: "Americana" }}>
-              {actualUserObj.username}
-              &apos;s
-              {' '}
-              Friends:
-            </h4>
-            {actualUserObj.friends.map(f => (
-              <div key={uuidv4()}>
-                <p className="card-text" style={{ fontFamily: "Americana" }}>
-                  •
-                  {' '}
-                  {f}
-                </p>
-              </div>
-            ))}
-            {actualUserObj.friends.length === 0 && <p style={{ fontFamily: "Americana" }}> No friends :( </p>}
-          </Card.Body>
-        </Card>
-      </Container>
       <Container>
-        <Row>
-          <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
-            <Link onClick={logout} to="logout">Logout</Link>
-            <Button style={{ marginLeft: '1rem'}}className="btn btn-danger hover" onClick={() => deleteUser()}>Delete account!</Button>
-          </Col>
-        </Row>
+        {users.map(u => (
+          actualUserObj.username === u.username ? (
+            <Card key={u._id} style={{ marginBottom: '1rem' }}>
+              <Card.Body>
+                <Card.Title style={{ fontFamily: "Americana" }}>
+                  {u.username}
+                  &apos;s
+                  {' '}
+                  picks:
+                </Card.Title>
+                <Container>
+                    <Foods u_id={u._id} foods={u.foods} />
+                </Container>
+                {u.foods.length === 0 && <p style={{ fontFamily: "Americana" }}> No favorite foods :( </p>}
+                <h4 style={{ fontFamily: "Americana" }}>
+                  {u.username}
+                  &apos;s
+                  {' '}
+                  Friends:
+                </h4>
+                {u.friends.map(f => (
+                  <div key={uuidv4()}>
+                    <p style={{ fontFamily: "Americana" }} className="card-text">
+                      •
+                      {' '}
+                      {f}
+                    </p>
+                  </div>
+                ))}
+                {u.friends.length === 0 && <p style={{ fontFamily: "Americana" }}> No friends :( </p>}
+              </Card.Body>
+            </Card>
+          ) : null
+        ))}
       </Container>
     </div>
   )
