@@ -33,6 +33,19 @@ const App = () => {
       window.alert('Error: addF')
     }
   }
+
+  const deleteUser = async() => {
+    try {
+      const { _id } = actualUserObj
+      const { data } = await axios.delete('/api/deleteUser', { data: { _id} })
+      if (data === 'User deleted') {
+        window.alert('User successfully deleted!')
+        navigate('/login')
+      }
+    } catch (err) {
+      window.alert('Error: deleteUser')
+    }
+  }
  
   // fetches Users every 2 seconds
   useEffect(async () => {
@@ -47,7 +60,6 @@ const App = () => {
     try {
       const { data } = await axios.get('/account/check')
       if (data !== 'user not logged in') {
-        console.log(data)
         setUser(data.username)
         setActualUserObj(data)
         setLoggedIn(true)
@@ -87,9 +99,16 @@ const App = () => {
             {loggedIn ? (
                 <div>
                   <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
+                  <button
+                    type="button"
+                    className="btn btn-danger hover"
+                    onClick={() => deleteUser()}
+                  >
+                    Delete account!
+                  </button>
                 </div>
               ) : (
-                <Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button>
+                <Button onClick={() => navigate('/login')}> Log in to see some awesome sauce! </Button>
             )}
           </Col>
         </Row>

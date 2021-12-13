@@ -31,4 +31,19 @@ router.put('/api/add', isAuthenticated, async (req, res, next) => {
   }
 })
 
+router.delete('/api/deleteUser', isAuthenticated, async (req, res, next) => {
+  const { _id } = req.body
+  try {
+    User.findByIdAndDelete(
+      _id,
+      (err, model) => {
+        if (err !== null) res.send('Error removing user')
+      },
+    )
+    res.send('User deleted')
+  } catch (err) {
+    next(new Error('could not delete user'))
+  }
+})
+
 module.exports = router
