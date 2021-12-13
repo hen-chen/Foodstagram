@@ -3,12 +3,12 @@
 Web platform that features DevOps to help users find what foods they like!
 
 <p align="center">
-  <img src="https://github.com/hen-chen/Web-and-Dev/blob/main/fries.jpeg" width="300px"/>
+  <img src="https://github.com/hen-chen/Foodstagram/blob/main/fries.jpeg" width="300px"/>
 </p>
 
 ## Installation
 
-1. Clone repo using `git clone https://github.com/hen-chen/Web-and-Dev.git`
+1. Clone repo using `git clone https://github.com/hen-chen/Foodstagram.git`
 2. CD to the appropiate repository.
 3. Make sure you have [docker](https://docs.docker.com/get-docker/) installed.
 
