@@ -61,7 +61,7 @@ const AddFood = ({ loggedIn, actualUserObj, setActualUserObj }) => {
             </div>
           ) : (
             <Row>
-              <Col>
+              <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
                 <Button className="btn" onClick={() => {
                   fetch('https://foodish-api.herokuapp.com/api/')
                     .then(res => res.json())

@@ -12,6 +12,18 @@ const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLogged
   const [fText, setFText] = useState('')
   const navigate = useNavigate()
 
+  // const getU = async () => {
+  //   try {
+  //     const { data } = await axios.get('/account/check')
+  //     if (data !== 'user not logged in') {
+  //       setActualUserObj(data)
+  //       console.log(data)
+  //     }
+  //   } catch (err) {
+  //     alert('error with getting current user')
+  //   }
+  // }
+
   // deletes a user
   const deleteUser = async() => {
     try {
@@ -43,7 +55,6 @@ const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLogged
     <div>
       <Container style={{ padding: '1rem' }}>
         <Row>
-          <Col><AddFood loggedIn={loggedIn} actualUserObj={actualUserObj} setActualUserObj={setActualUserObj}/></Col>
           <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>{ /* add a new friend */
             newFriend ? (
               <AddFriends setNewFriend={() => setNewFriend(false)} fText={fText} setFText={setFText} actualUserObj={actualUserObj}/>
@@ -54,9 +65,14 @@ const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLogged
             )
           }</Col>
         </Row>
+        <Row style={{ marginTop: '1rem'}}>
+          <Col>
+            <AddFood loggedIn={loggedIn} actualUserObj={actualUserObj} setActualUserObj={setActualUserObj}/>
+          </Col>
+        </Row>
       </Container>
 
-      <Container>
+      <Container style={{ padding: '1rem' }}>
         {users.map(u => (
           actualUserObj.username === u.username ? (
             <Card key={u._id} style={{ marginBottom: '1rem' }}>
