@@ -62,7 +62,7 @@ const Login = () => {
             </div>
           </Form>
           <p>
-            Dont have an account?
+            Don&apos;t have an account?
             {' '}
             <Link to="/signup">Sign up!</Link>
           </p>

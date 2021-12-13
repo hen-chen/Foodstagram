@@ -18,7 +18,7 @@ router.get('/check', (req, res) => {
   if (req.session.username === undefined || req.session.username === null) {
     res.send('user not logged in')
   } else {
-    res.send(req.session.username)
+    res.send(req.session.user)
   }
 })
 
@@ -50,6 +50,7 @@ router.post('/login', async (req, res, next) => {
       if (password === passDB) {
         req.session.username = username
         req.session.password = password
+        req.session.user = user
         res.send('user logged in successfully')
       } else {
         res.send('user credentials are wrong')
