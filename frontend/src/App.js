@@ -226,7 +226,6 @@ const App = () => {
         <Container style={{ padding: '1rem' }}>
             <h3>Users and their favorite food!</h3>
             {users.map(u => (
-<<<<<<< Updated upstream
               <Card key={u._id} style={{ marginBottom: '1rem' }}>
                 <Card.Body>
                   <Card.Title>
@@ -250,44 +249,6 @@ const App = () => {
                   {u.foods.length === 0 && <p> No favorite foods :( </p>}
                 </Card.Body>
               </Card>
-=======
-              <div key={u._id} className="card" style={{ marginBottom: '1rem' }}>
-                <h4>
-                  {u.username}
-                  &apos;s
-                  {' '}
-                  picks:
-                </h4>
-                {u.foods.map(f => (
-                  <div key={uuidv4()}>
-                    <p className="card-text">
-                      •
-                      {' '}
-                      <a href={f} target="_">
-                        {getFoodRegex(f)}
-                      </a>
-                    </p>
-                  </div>
-                ))}
-                {u.foods.length === 0 && <p> No favorite foods :( </p>}
-                <h4>
-                  {u.username}
-                  &apos;s
-                  {' '}
-                  Friends:
-                </h4>
-                {u.friends.map(f => (
-                  <div key={uuidv4()}>
-                    <p className="card-text">
-                      •
-                      {' '}
-                      {f}
-                    </p>
-                  </div>
-                ))}
-                {u.friends.length === 0 && <p> No friends :( </p>}
-              </div>
->>>>>>> Stashed changes
             ))}
           </Container>
       </div>
