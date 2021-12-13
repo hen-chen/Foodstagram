@@ -52,12 +52,16 @@ const App = () => {
     }
     if (show === 'home') {
       document.getElementById('home').style.fontWeight = 'bold'
+      document.getElementById('home').style.textDecoration = 'underline'
       document.getElementById('profile').style.fontWeight = 'normal'
+      document.getElementById('profile').style.textDecoration = 'none'
     }
 
     if (show === 'profile') {
       document.getElementById('home').style.fontWeight = 'normal'
+      document.getElementById('home').style.textDecoration = 'none'
       document.getElementById('profile').style.fontWeight = 'bold'
+      document.getElementById('profile').style.textDecoration = 'underline'
     }
   }, [user, show])
 
@@ -71,7 +75,7 @@ const App = () => {
               loggedIn ? (
                 <Row>
                   <Col sm={8} style={{ fontFamily: "Snell Roundhand, cursive" }}><h1>Foodstagram!!</h1></Col>
-                  <Col><h5 id="home" onClick={() => setShow('home')} style={{ fontFamily: "Americana", fontWeight: "bold" }}>Home</h5></Col>
+                  <Col><h5 id="home" onClick={() => setShow('home')} style={{ fontFamily: "Americana", fontWeight: "bold", textDecoration: "underline" }}>Home</h5></Col>
                   <Col><h5 id="profile" onClick={() => setShow('profile')} style={{ fontFamily: "Americana" }}>Profile</h5></Col>
                   <Col>
                     <h5 style={{ fontFamily: "Americana" }}>Hi, {user}!</h5>
