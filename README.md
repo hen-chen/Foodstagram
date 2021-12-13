@@ -2,6 +2,10 @@
 
 Web platform that features DevOps to help users find what foods they like!
 
+<p align="center">
+  <img src="https://github.com/hen-chen/Web-and-Dev/blob/main/fries.jpeg" width="300px"/>
+</p>
+
 ## Installation
 
 1. Clone repo using `git clone https://github.com/hen-chen/Mini-Steam.git`
