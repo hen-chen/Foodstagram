@@ -67,6 +67,7 @@ const App = () => {
     <div>
       <div style={{ backgroundColor: '#efefef' }}>
         <Container style={{ padding: '1rem' }}>
+<<<<<<< HEAD
             {
               loggedIn ? (
                 <Row>
@@ -85,6 +86,107 @@ const App = () => {
                 </Row>
               )
             }
+=======
+          <Row>
+            <Col><h1 style={{fontFamily: "Snell Roundhand, cursive"}}>Foodstagram</h1></Col>
+            <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
+              {loggedIn ? (
+                <div>
+                  <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
+                  <Button
+                    type="button"
+                    className="btn btn-danger hover"
+                    onClick={() => deleteUser()}
+                  >
+                    Delete account!
+                  </Button>
+
+                  <br />
+                  {/* add a new friend */}
+                  <button
+                    type="button"
+                    className="btn mx-1 btn-primary hover"
+                    onClick={() => setNewFriend(true)}
+                  >
+                    Add Friend!
+                  </button>
+
+                  {newFriend && (
+                    <div className="card">
+                      <h4> New Friend: </h4>
+                      <input
+                        onChange={e => setFText(e.target.value)}
+                        placeholder="Write new friend username here"
+                      />
+                      <br />
+                      <button
+                        type="button"
+                        className="btn mx-1 btn-warning hover"
+                        onClick={() => addFriend()}
+                      >
+                        Submit Friend Request!
+                      </button>
+                      <button
+                        type="button"
+                        className="btn mx-1 btn-dark hover"
+                        onClick={() => setNewFriend(false)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  )}
+                </div>
+                ) : (
+                  <Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button>
+              )}
+            </Col>
+          </Row>
+          <div>
+            {loggedIn && (
+              <div>
+                { image != null ? (
+                  <div>
+                    <Row style={{ marginTop: '1rem' }}>
+                      <Col style={{display: 'flex', justifyContent: 'center'}}>
+                        <Image style={{ maxWidth: '300px', maxHeight:'300px' }} src={image} fluid/>
+                      </Col>
+                    </Row>
+                    <Row style={{ marginTop: '1rem' }}>
+                      <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
+                        <Button variant="info" className="btn" onClick={() => addF()}> Fav! 🤩</Button>
+                      </Col>
+                      <Col>
+                        <Button variant="info" className="btn" onClick={() => {
+                          fetch('https://foodish-api.herokuapp.com/api/')
+                            .then(res => res.json())
+                            .then(({ image }) => {
+                              setImage(image)
+                            })
+                        }}>
+                          nah, next!
+                        </Button>
+                      </Col>
+                    </Row>
+                  </div>
+                ) : (
+                  <Row>
+                    <Col>
+                      <Button className="btn" onClick={() => {
+                        fetch('https://foodish-api.herokuapp.com/api/')
+                          .then(res => res.json())
+                          .then(({ image }) => {
+                            setImage(image)
+                          })
+                      }}>
+                        Load food image!
+                      </Button>
+                    </Col>
+                  </Row>
+                )}
+              </div>
+            )}
+          </div>
+>>>>>>> 8fd71c1 (README)
         </Container>
       </div>
       {
