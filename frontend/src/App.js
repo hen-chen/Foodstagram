@@ -238,7 +238,7 @@ const App = () => {
                     <Row>
                       {u.foods.map((f, id) => (
                           <Col sm={3}>
-                            <Food id={id} foodImg={f} foodName={getFoodRegex(f)} />
+                            <Food id={id+u._id} foodImg={f} foodName={getFoodRegex(f)} />
                           </Col>
                       ))}
                     </Row>

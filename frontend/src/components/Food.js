@@ -8,7 +8,7 @@ const Food = ({ id, foodImg, foodName }) => {
     e.target.style.opacity = '0.3'
     document.getElementById(id).style.display = 'block'
     document.getElementById(id).value = foodName
-    console.log(foodName)
+    console.log(id)
   }
 
   const outEffect = e => {
