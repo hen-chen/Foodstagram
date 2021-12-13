@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
-import Food from './components/Food'
+import Foods from './components/Foods'
 
 const App = () => {
   const [image, setImage] = useState(null)
@@ -235,13 +235,7 @@ const App = () => {
                     picks:
                   </Card.Title>
                   <Container>
-                    <Row>
-                      {u.foods.map((f, id) => (
-                          <Col sm={3}>
-                            <Food id={id+u._id} foodImg={f} foodName={getFoodRegex(f)} />
-                          </Col>
-                      ))}
-                    </Row>
+                      <Foods u_id={u._id} foods={u.foods} />
                   </Container>
                   {u.foods.length === 0 && <p> No favorite foods :( </p>}
                 </Card.Body>
