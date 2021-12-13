@@ -42,7 +42,7 @@ const App = () => {
       window.alert('Error: addF')
     }
   }
-  
+
   // adds Friend to user list
   const addFriend = async() => {
     try {
@@ -127,13 +127,13 @@ const App = () => {
               {loggedIn ? (
                 <div>
                   <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
-                  <button
+                  <Button
                     type="button"
                     className="btn btn-danger hover"
                     onClick={() => deleteUser()}
                   >
                     Delete account!
-                  </button>
+                  </Button>
 
                   <br />
                   {/* add a new friend */}
