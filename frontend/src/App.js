@@ -4,6 +4,7 @@ import axios from 'axios'
 import { v4 as uuidv4 } from 'uuid'
 import { Container, Row, Col, Button, Image, Card } from 'react-bootstrap'
 import Foods from './components/Foods'
+import AddFriends from './components/AddFriends'
 
 const App = () => {
   const [image, setImage] = useState(null)
@@ -40,23 +41,6 @@ const App = () => {
         })
     } catch (err) {
       window.alert('Error: addF')
-    }
-  }
-
-  // adds Friend to user list
-  const addFriend = async() => {
-    try {
-      const { _id } = actualUserObj
-      const { data } = await axios.put('/api/friend', { _id, friend: fText })
-      setNewFriend(false)
-      setFText('')
-      if (data === 'Friend added') {
-        window.alert('Friend added!')
-      } else {
-        window.alert('Error: no user with that username!')
-      }
-    } catch (err) {
-      window.alert('Error: addFriend')
     }
   }
 
@@ -127,48 +111,18 @@ const App = () => {
               {loggedIn ? (
                 <div>
                   <h5>Hi, {user}! <Link onClick={logout} to="logout">Logout</Link></h5>
-                  <Button
-                    type="button"
-                    className="btn btn-danger hover"
-                    onClick={() => deleteUser()}
-                  >
-                    Delete account!
-                  </Button>
 
-                  <br />
                   {/* add a new friend */}
-                  <button
-                    type="button"
-                    className="btn mx-1 btn-primary hover"
-                    onClick={() => setNewFriend(true)}
-                  >
-                    Add Friend!
-                  </button>
-
-                  {newFriend && (
-                    <div className="card">
-                      <h4> New Friend: </h4>
-                      <input
-                        onChange={e => setFText(e.target.value)}
-                        placeholder="Write new friend username here"
-                      />
-                      <br />
-                      <button
-                        type="button"
-                        className="btn mx-1 btn-warning hover"
-                        onClick={() => addFriend()}
-                      >
-                        Submit Friend Request!
-                      </button>
-                      <button
-                        type="button"
-                        className="btn mx-1 btn-dark hover"
-                        onClick={() => setNewFriend(false)}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  )}
+                  {
+                    newFriend ? (
+                      <AddFriends setNewFriend={() => setNewFriend(false)} fText={fText} setFText={setFText} actualUserObj={actualUserObj}/>
+                    ) : (
+                      <div>
+                        <Button className="btn mx-1 btn-primary hover" onClick={() => setNewFriend(true)}>Add Friend!</Button>
+                        <Button className="btn btn-danger hover" onClick={() => deleteUser()}>Delete account!</Button>
+                      </div>
+                    )
+                  }
                 </div>
                 ) : (
                   <Button onClick={() => navigate('/login')}> Log in to see awesome sauce! </Button>
