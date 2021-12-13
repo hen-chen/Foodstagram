@@ -92,6 +92,15 @@ const Profile = ({ loggedIn, actualUserObj, setActualUserObj, setUser, setLogged
           ) : null
         ))}
       </Container>
+
+      <Container>
+        <Row>
+          <Col style={{ display: 'flex', justifyContent: 'flex-end', alignSelf: 'flex-start' }}>
+            <Link onClick={logout} to="logout">Logout</Link>
+            <Button style={{ marginLeft: '1rem'}}className="btn btn-danger hover" onClick={() => deleteUser()}>Delete account!</Button>
+          </Col>
+        </Row>
+      </Container>
     </div>
   )
 }
