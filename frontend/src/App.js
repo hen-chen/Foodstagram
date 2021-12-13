@@ -70,7 +70,7 @@ const App = () => {
             {
               loggedIn ? (
                 <Row>
-                  <Col sm={8}><h1>Foodstagram!!</h1></Col>
+                  <Col sm={8}><h1 style={{ fontFamily: "Snell Roundhand, cursive" }}>Foodstagram!!</h1></Col>
                   <Col><h5 id="home" onClick={() => setShow('home')}>Home</h5></Col>
                   <Col><h5 id="profile" onClick={() => setShow('profile')}>Profile</h5></Col>
                   <Col>

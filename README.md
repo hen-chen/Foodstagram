@@ -23,4 +23,4 @@ To run the web app remotely, follow these commands:
 1. Run `docker build -t [name] .`, where `[name]` is the name of the image.
 2. Run `kubectl delete all --all` (if you made changes)
 3. Run `kubectl apply -f k8s/`
-4. Go to [henchen.cis188.org](henchen.cis188.org) to view the app!
+4. Go to [henchen.cis188.org](https://henchen.cis188.org) to view the app!
